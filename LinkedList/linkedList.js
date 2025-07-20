@@ -28,3 +28,11 @@
 // Right side is the next pointer
 
 // null means it's the end of the list
+
+
+// Singly Linked List
+//Head
+//  ↓
+// [1] → [2] → [3] → [4] → [5] → null
+                       //   ↑
+                      //  Tail
