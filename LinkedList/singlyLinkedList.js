@@ -32,6 +32,11 @@ class LinkedList {
         let temp = this.head;
         let prev = this.head;
 
+        // Move prev to current temp, and temp to the next node.
+        
+        // By the end of the loop:
+        // temp :- last node
+        // prev :- second-to-last node
         while (temp.next) {
             prev = temp;
             temp = temp.next;
@@ -110,13 +115,16 @@ class LinkedList {
 
     insert(index, value) {
         if (index < 0 || index > this.length) return false;
-        if (index === 0) return this.unshift(value);
+        if (index === 0) return this.unshift(value); //unshift() adds a node to the beginning and updates head/tail properly.
         if (index === this.length) return this.push(value);
 
         const newNode = new Node(value);
         const prev = this.get(index - 1);
+        //Finds the node just before the desired index using the get() method. For example, to insert at index 2, we need the node at index 1 to update its .next
         newNode.next = prev.next;
+        //Points the new node’s .next to the node that comes after prev This ensures the chain is maintained — you're inserting between two nodes.
         prev.next = newNode;
+        //Updates prev's .next to point to the new node. This completes the insertion by "linking in" the new node.
         this.length++;
         return true;
     }
