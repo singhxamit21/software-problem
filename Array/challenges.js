@@ -300,12 +300,14 @@ let array = [
   { "name": "Carl", "age": 35 }
 ];
 
-function getDistinctValues(array, key) {
-  return [...new Set(array.map(item => item[key]))];
-}
+// Remove duplicates based on `age`
+// findIndex returns the index of the first age number in the array
+let uniqueArryObj = array.filter((item, index, self) =>
+  index === self.findIndex((t) => t.age === item.age)
+);
 
-console.log(getDistinctValues(array, "age")); // [17, 35]
-console.log(getDistinctValues(array, "name")); // ["Joe", "Bob", "Carl"]
+console.log(uniqueArryObj);
+
 
 function findMinMax(arr) {
   let minValue = Infinity;
@@ -582,13 +584,11 @@ const maxSlidingWindowNaive = function (nums, k) {
   const result = [];
   const n = nums.length;
 
-  for (i = 0; i <= n - k; i++) {
-
+  for (let i = 0; i <= n - k; i++) {
     let max = nums[i];
-    for (j = 1; j < k; j++) {
-
-      if (nums[i + j] > max) {
-        max = nums[j + i];
+    for (let j = i + 1; j < i + k; j++) {
+      if (nums[j] > max) {
+        max = nums[j];
       }
     }
 
@@ -597,9 +597,8 @@ const maxSlidingWindowNaive = function (nums, k) {
 
   return result;
 };
-
-
-console.log(maxSlidingWindowNaive([1, 3, -1, -3, 5, 3, 6, 7], 3)); //[3, 3, 5, 5, 6, 7]
+console.log(maxSlidingWindowNaive([1, 3, -1, -3, 5, 3, 6, 7], 3));
+// Output: [3, 3, 5, 5, 6, 7]
 
 const isValidParenthesis = (str) => {
   const stack = [];
@@ -626,23 +625,18 @@ console.log(isValidParenthesis("([)]")); // false
 console.log(isValidParenthesis("()")); // true
 console.log(isValidParenthesis("(")); // false
 
-function longestCommonPrefix(strs) {
-  if (strs.length === 0) return "";
-
-  let prefix = strs[0];
-
-  for (let i = 1; i < strs.length; i++) {
+const longestCommonPrefix = (arr) => {
+  if (arr.length === 0) return "";
+  let prefix = arr[0]
+  for (let i = 1; i < arr.length; i++) {
     for (let j = 0; j < prefix.length; j++) {
-      if (prefix[j] !== strs[i][j]) {
-        prefix = prefix.substring(0, j);
-        break;
+      if (prefix[j] !== arr[i][j]) {
+        prefix = prefix.slice(0, j)
       }
     }
   }
-
-  return prefix;
+  return prefix
 }
-
 console.log(longestCommonPrefix(["flower", "flow", "flight"])); // Output: "fl"
 console.log(longestCommonPrefix(["dog", "racecar", "car"]));    // Output: ""
 
