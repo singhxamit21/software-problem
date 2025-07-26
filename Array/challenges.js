@@ -40,16 +40,43 @@ console.log(reverseInt(-123));
 // 3. Capitalize each word (map method)
 // 3. Convert array back to string (join method)
 
-const capitalize = (str) => {
-  return str
-    .toLowerCase()
-    .split(" ")
-    .map((word) => word[0].toUpperCase() + word.slice(1))
-    .join(" ");
-};
+let text = "i am software developer";
 
-console.log(capitalize("hello world"));
-console.log(capitalize("jordan peterson"));
+let capitalizedText = text.split(' ')
+  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+  .join(' ');
+
+console.log(capitalizedText);  // Output: "I Am Software Developer"
+
+function truncate(str, maxlength) {
+  if (str.length > maxlength) {
+    return str.slice(0, maxlength) + "..."
+  } else {
+    return str
+  }
+}
+
+console.log(truncate("Amit Singh is the Best Coder", 9))
+
+const generateOTP = (length = 6) => {
+  let otp = '';
+  const digits = '0123456789';
+
+  for (let i = 0; i < length; i++) {
+    otp += digits[Math.floor(Math.random() * digits.length)];
+  }
+
+  return otp;
+}
+
+console.log(generateOTP(4));
+
+
+const randomIdGenerator = () => {
+  return Date.now()
+}
+
+console.log(randomIdGenerator())
 
 //5. FizzBuzz.js
 // 1. Print numbers from 1 to n
@@ -186,6 +213,33 @@ function twoSub(nums, target) {
 
 console.log(twoSub([2, 7, 11, 15], 9));
 console.log(twoSub([1, 3, 7, 9, 2], 11));
+
+function threeSum(nums, target) {
+  let result = [];
+  const hash = {};
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = i + 1; j < nums.length; j++) {
+      const complement = target - (nums[i] + nums[j]);
+      if (complement in hash) {
+        result.push([nums[i], nums[j], complement]);
+      } else {
+        hash[nums[j]] = j;
+      }
+    }
+  }
+
+  return result;
+}
+
+console.log(threeSum([2, 7, 11, 15], 33))
+
+const input = [[7, 11, 15], [7, 15, 11], [11, 15, 7]];
+
+const unique = [
+  ...new Set(input.map(arr => JSON.stringify(arr.sort((a, b) => a - b))))
+].map(str => JSON.parse(str));
+
+console.log(unique); // Output: [ [ 7, 11, 15 ] ]
 
 let arr = [
   [1, 2],
@@ -524,4 +578,71 @@ const tasks = [
 const manager = createTaskManager(2);
 manager.addMultiple(tasks);
 
+const maxSlidingWindowNaive = function (nums, k) {
+  const result = [];
+  const n = nums.length;
+
+  for (i = 0; i <= n - k; i++) {
+
+    let max = nums[i];
+    for (j = 1; j < k; j++) {
+
+      if (nums[i + j] > max) {
+        max = nums[j + i];
+      }
+    }
+
+    result.push(max);
+  }
+
+  return result;
+};
+
+
+console.log(maxSlidingWindowNaive([1, 3, -1, -3, 5, 3, 6, 7], 3)); //[3, 3, 5, 5, 6, 7]
+
+const isValidParenthesis = (str) => {
+  const stack = [];
+  const brackets = {
+    "{": "}",
+    "[": "]",
+    "(": ")",
+  };
+  for (let char of str) {
+    if (brackets[char]) {
+      stack.push(char);
+    } else {
+      const top = stack.pop();
+      if (!top || brackets[top] !== char) {
+        return false;
+      }
+    }
+  }
+  return stack.length === 0;
+};
+
+console.log(isValidParenthesis("(){}[]")); // true
+console.log(isValidParenthesis("([)]")); // false
+console.log(isValidParenthesis("()")); // true
+console.log(isValidParenthesis("(")); // false
+
+function longestCommonPrefix(strs) {
+  if (strs.length === 0) return "";
+
+  let prefix = strs[0];
+
+  for (let i = 1; i < strs.length; i++) {
+    for (let j = 0; j < prefix.length; j++) {
+      if (prefix[j] !== strs[i][j]) {
+        prefix = prefix.substring(0, j);
+        break;
+      }
+    }
+  }
+
+  return prefix;
+}
+
+console.log(longestCommonPrefix(["flower", "flow", "flight"])); // Output: "fl"
+console.log(longestCommonPrefix(["dog", "racecar", "car"]));    // Output: ""
 
