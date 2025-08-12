@@ -301,12 +301,18 @@ let array = [
 ];
 
 // Remove duplicates based on `age`
-// findIndex returns the index of the first age number in the array
-let uniqueArryObj = array.filter((item, index, self) =>
-  index === self.findIndex((t) => t.age === item.age)
-);
+function removeDuplicatesByProp(arr, prop) {
+  const seen = {};
+  return arr.filter(item => {
+    if (seen[item[prop]]) {
+      return false;
+    }
+    seen[item[prop]] = true;
+    return true;
+  });
+}
 
-console.log(uniqueArryObj);
+console.log(removeDuplicatesByProp(array, "age"));
 
 
 function findMinMax(arr) {
@@ -492,6 +498,22 @@ function maxSubArray(nums) {
 
   return maxSum;
 };
+
+// const maxSubArray = (arr) => {
+//     let currSum = arr[0];
+//     let maxSum = arr[0];
+//     for (let i = 1; i < arr.length; i++) {
+//         if (arr[i] < arr[i] + currSum) {
+//             currSum = arr[i] + currSum; 
+//         } else {
+//             currSum = arr[i]; 
+//         }
+//         if (currSum > maxSum) {
+//             maxSum = currSum;
+//         }
+//     }
+//     return maxSum;
+// };
 
 
 console.log("Maximum sum of subarray:", maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4])); //6
