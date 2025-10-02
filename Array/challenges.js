@@ -27,12 +27,12 @@ console.log(palindrome("Hello"));
 // 7. Return the number
 
 const reverseInt = (n) => {
-  const reversed = n.toString().split("").reverse().join("");
-  console.log(Math.sign(n)) // -1
-  return parseInt(reversed) * Math.sign(n);
+  const reversed = Math.abs(n).toString().split("").reverse().join("");
+  return Number(reversed) * Math.sign(n);
 };
 
-console.log(reverseInt(-123));
+console.log(reverseInt(-123)); // -321
+
 
 // 4. Sentence Capitalization.js
 // 1. Make the string lowercase (toLowerCase method)
