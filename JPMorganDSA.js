@@ -233,9 +233,9 @@ const lengthOfLongestSubstring = (s) => {
 };
 
 // Examples
-console.log(lengthOfLongestSubstring("abcabcbb")); // 3
-console.log(lengthOfLongestSubstring("bbbbb"));    // 1
-console.log(lengthOfLongestSubstring("pwwkew"));   // 3
+console.log(lengthOfLongestSubstring("abcabcbb")); // 3 //Substrings without repeating characters: "abc", "bca", "cab", etc. The longest is "abc", length 3.
+console.log(lengthOfLongestSubstring("bbbbb"));    // 1 //Every substring has only 'b' Longest substring without repeating characters is "b", length 1.
+console.log(lengthOfLongestSubstring("pwwkew"));   // 3 //Longest substrings without repeating characters: "wke" and "kew". Length is 3.
 
 
 //Group Anagrams : ["eat","tea","tan","ate","nat","bat"] → [["eat","tea","ate"],["tan","nat"],["bat"]]
