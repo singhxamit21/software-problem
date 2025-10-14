@@ -195,6 +195,37 @@ const OptimalMerge = (nums1, m, nums2, n) => {
 console.log(OptimalMerge([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3)) //[1,2,2,3,5,6]
 console.log(OptimalMerge([1, 2, 3, 0, 0, 0], 3, [4, 5, 6], 3)) //[1,2,3,4,5,6] //nums2 gets fully used before nums1
 
+//Merge Two Sorted Arrays without M and N
+const OptimalMergeWithoutMN = (nums1, nums2) => {
+  let m = nums1.length - nums2.length; // meaningful elements in nums1
+  let n = nums2.length;
+
+  let p1 = m - 1; // last meaningful element of nums1
+  let p2 = n - 1; // last element of nums2
+
+  for (let i = m + n - 1; i >= 0; i--) {
+    if (p2 < 0) break;
+
+    if (p1 >= 0 && nums1[p1] > nums2[p2]) {
+      nums1[i] = nums1[p1--];
+    } else {
+      nums1[i] = nums2[p2--];
+    }
+  }
+};
+
+// Test cases
+let arr1 = [1, 2, 3, 0, 0, 0];
+let arr2 = [2, 5, 6];
+OptimalMergeWithoutMN(arr1, arr2);
+console.log(arr1); // [1,2,2,3,5,6]
+
+arr1 = [1, 2, 3, 0, 0, 0];
+arr2 = [4, 5, 6];
+OptimalMergeWithoutMN(arr1, arr2);
+console.log(arr1); // [1,2,3,4,5,6]
+
+
 //Count Occurrences
 // [1,2,2,3,3,3] → {1:1, 2:2, 3:3}
 const countOccurrences = (arr) => {
