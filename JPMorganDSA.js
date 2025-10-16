@@ -341,3 +341,156 @@ const maxSlidingWindowNaive = function (nums, k) {
 };
 console.log(maxSlidingWindowNaive([1, 3, -1, -3, 5, 3, 6, 7], 3));
 // Output: [3, 3, 5, 5, 6, 7]
+
+
+//GO Daddy
+
+//Given two lists, find the common elements in them in javascript
+
+const list1 = [1, 2, 3, 4, 5];
+const list2 = [3, 4, 5, 6, 7];
+
+const common = list1.filter(item => list2.includes(item));
+console.log(common); // [3, 4, 5]
+
+// const list1 = [1, 2, 3, 4, 5];
+// const list2 = [3, 4, 5, 6, 7];
+
+// const set2 = new Set(list2);
+// const common = list1.filter(item => set2.has(item));
+// console.log(common); // [3, 4, 5]
+
+
+
+//Find the K nearest points from (0,0) in a 2D plane.
+function kClosest(points, K) {
+  // Sort by Euclidean distance squared (no need for sqrt)
+  points.sort((a, b) => 
+    (a[0] ** 2 + a[1] ** 2) - (b[0] ** 2 + b[1] ** 2)
+  );
+  
+  // Return the first K points
+  return points.slice(0, K);
+}
+
+// Example
+const points = [[3, 3], [5, -1], [-2, 4], [0, 2]];
+const K = 2;
+console.log(kClosest(points, K)); // [ [0, 2], [3, 3] ]
+
+//Three Sum Problem
+function threeSum(nums, target) {
+  let result = [];
+  const hash = {};
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = i + 1; j < nums.length; j++) {
+      const complement = target - (nums[i] + nums[j]);
+      if (complement in hash) {
+        result.push([nums[i], nums[j], complement]);
+      } else {
+        hash[nums[j]] = j;
+      }
+    }
+  }
+
+  return result;
+}
+
+console.log(threeSum([2, 7, 11, 15], 33))
+
+let arr = [
+  [1, 2],
+  [3, 4],
+  [5, 6, [7, 8], 9],
+  [10, 11, 12],
+];
+
+const customFlat = (arr, depth = 1) => {
+  let result = [];
+  arr.forEach((ar) => {
+    if (Array.isArray(ar) && depth > 0) {
+      result.push(...customFlat(ar, depth - 1));
+    } else {
+      result.push(ar)
+    }
+  })
+  return result;
+}
+
+console.log(customFlat(arr))
+
+
+//Reverse a string or find the first non-repeating character.
+function firstNonRepeatingChar(str) {
+    const charCount = {};
+
+    // Count the occurrences of each character
+    for (const char of str) {
+        charCount[char] = (charCount[char] || 0) + 1;
+    }
+
+    // Find the first character with count 1
+    for (const char of str) {
+        if (charCount[char] === 1) {
+            return char;
+        }
+    }
+
+    return null; // If all characters repeat
+}
+
+// Example
+const word = "swiss";
+const firstUnique = firstNonRepeatingChar(word);
+console.log(firstUnique); // Output: "w"
+
+//Array Combinations Generate all possible combinations of elements from an array
+function getAllCombinations(arr) {
+    const result = [];
+
+    function helper(start, combo) {
+        if (combo.length > 0) {
+            result.push([...combo]);
+        }
+
+        for (let i = start; i < arr.length; i++) {
+            combo.push(arr[i]);
+            helper(i + 1, combo);
+            combo.pop(); // backtrack
+        }
+    }
+
+    helper(0, []);
+    return result;
+}
+
+// Example
+
+const combinations = getAllCombinations([1, 2, 3]);
+console.log(combinations); //[ [ 1 ], [ 1, 2 ], [ 1, 2, 3 ], [ 1, 3 ], [ 2 ], [ 2, 3 ], [ 3 ] ]
+
+function getCombinationsOfSize(arr, size) {
+    const result = [];
+
+    function helper(start, combo) {
+        if (combo.length === size) {
+            result.push([...combo]);
+            return;
+        }
+
+        for (let i = start; i < arr.length; i++) {
+            combo.push(arr[i]);
+            helper(i + 1, combo);
+            combo.pop();
+        }
+    }
+
+    helper(0, []);
+    return result;
+}
+
+// Example
+console.log(getCombinationsOfSize([1, 2, 3], 2));
+// Output: [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ]
+
+
