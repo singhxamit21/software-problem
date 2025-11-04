@@ -17,6 +17,29 @@ const palindrome = (str) => str.split("").reverse().join("") === str;
 console.log(palindrome("cddc"));
 console.log(palindrome("Hello"));
 
+var isPalindrome = function (s) {
+    s = s.toLowerCase();
+    let i = 0;
+    let j = s.length - 1;
+    while (i < j) {
+        if (!s[i].match(/[a-z0-9]/i)) {
+            ++i;
+        }
+        else if (!s[j].match(/[a-z0-9]/i)) {
+            --j;
+        }
+        else if (s[i] === s[j]) {
+            ++i;
+            --j;
+        }
+        else {
+            return false;
+        }
+    }
+    return true;
+};
+
+
 //3. Integer Reversal.js (1234 -> 4321)
 // 1. Convert number to string (toString method)
 // 2. Convert String to array (split method)
@@ -393,20 +416,16 @@ function thirdLargest(arr) {
 console.log("Third largest element:", thirdLargest([8, 20, 10, 10, 5, 8, 20]));   // Output: 8
 
 
-function reverseArray(arr) {
-  let start = 0;
-  let end = arr.length - 1;
+const reverseArray = (s) => {
+    let len = s.length;
+    let halfLen = Math.floor(len / 2);
 
-  while (start < end) {
-    let temp = arr[start];
-    arr[start] = arr[end];
-    arr[end] = temp;
-
-    start++;
-    end--;
-  }
-  return arr;
-}
+    for (let i = 0; i < halfLen; i++) {
+        let temp = s[i];
+        s[i] = s[len - i - 1];
+        s[len - i - 1] = temp;
+    }
+};
 
 console.log(reverseArray([1, 2, 3, 4, 5]))
 console.log(reverseArray(["a", "c", "m", "b", "y"]))
