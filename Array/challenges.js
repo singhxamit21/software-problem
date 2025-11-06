@@ -507,6 +507,32 @@ function groupAnagrams(strs) {
   return Object.values(anagramMap);
 }
 
+//Group Anagrams : ["eat","tea","tan","ate","nat","bat"] → [["eat","tea","ate"],["tan","nat"],["bat"]]
+var groupAnagrams = function (strs) {
+  let map = {};
+
+  for (let s of strs) {
+    // frequency array for 'a' to 'z'
+    let freqArr = Array(26).fill(0);
+
+    for (let ch of s) {
+      let index = ch.charCodeAt(0) - "a".charCodeAt(0);
+      freqArr[index]++;
+    }
+
+    // use the frequency array as a unique key
+    let key = freqArr.join(",");
+
+    if (map[key]) {
+      map[key].push(s);
+    } else {
+      map[key] = [s];
+    }
+  }
+
+  return Object.values(map);
+};
+
 const strs = ["eat", "tea", "tan", "ate", "nat", "bat"];
 const groups = groupAnagrams(strs);
 
