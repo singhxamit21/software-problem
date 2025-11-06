@@ -285,6 +285,14 @@ const customFlat = (arr, depth = 1) => {
 
 console.log(customFlat(arr))
 
+const fibonacci = (n) => {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+};
+
+console.log(fibonacci(5)) //5
+console.log(fibonacci(8)) //21
+
 const fibonacciSequence = (number) => {
   let n1 = 0, n2 = 1, nextTerm;
   let sequence = [];
