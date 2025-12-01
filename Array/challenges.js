@@ -738,3 +738,43 @@ const longestCommonPrefix = (arr) => {
 console.log(longestCommonPrefix(["flower", "flow", "flight"])); // Output: "fl"
 console.log(longestCommonPrefix(["dog", "racecar", "car"]));    // Output: ""
 
+
+function largestSubstring(s1, s2) {
+    let maxSubstr = '';
+
+    // Create a set of characters in s1 for quick lookup
+    const setS1 = new Set(s1);
+
+    // Iterate over all substrings of s2
+    for (let i = 0; i < s2.length; i++) {
+        for (let j = i + 1; j <= s2.length; j++) {
+            let substring = s2.slice(i, j);
+            
+            // Check if all characters in the substring are in s1
+            if (isValidSubstring(substring, setS1)) {
+                // Update the longest valid substring
+                if (substring.length > maxSubstr.length) {
+                    maxSubstr = substring;
+                }
+            }
+        }
+    }
+
+    return maxSubstr;
+}
+
+// Helper function to check if a substring contains only characters from s1
+function isValidSubstring(substring, setS1) {
+    for (let char of substring) {
+        if (!setS1.has(char)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Example usage:
+let s1 = "abcd";
+let s2 = "abeidbaoocod";
+console.log(largestSubstring(s1, s2));  // Output: "baoocod"
+
