@@ -438,6 +438,41 @@ const reverseArray = (s) => {
 console.log(reverseArray([1, 2, 3, 4, 5]))
 console.log(reverseArray(["a", "c", "m", "b", "y"]))
 
+function reverseKeepVowels(str) {
+  const vowels = "aeiouAEIOU";
+  let arr = str.split("");
+
+  let left = 0;
+  let right = arr.length - 1;
+
+  while (left < right) {
+    if (!vowels.includes(arr[left]) && !vowels.includes(arr[right])) {
+      // swap consonants using temp
+      let temp = arr[left];
+      arr[left] = arr[right];
+      arr[right] = temp;
+
+      left++;
+      right--;
+    } 
+    else if (vowels.includes(arr[left])) {
+      left++;
+    } 
+    else if (vowels.includes(arr[right])) {
+      right--;
+    }
+  }
+
+  return arr.join("");
+}
+
+console.log(reverseKeepVowels("sachin")); 
+// nihcas
+
+console.log(reverseKeepVowels("hello world")); 
+// dolle werlh
+
+
 function rotateArrayByK(arr, k) {
   const n = arr.length;
   k = k % n; // handle k > n
